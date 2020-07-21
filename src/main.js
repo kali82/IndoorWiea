@@ -1,4 +1,3 @@
-
 var mapwizeMap = null;
 var apiKey = '89a2695d7485fda885c96b405dcc8a25';
 var modeId = '5da6bec9aefa100010c7df67';
