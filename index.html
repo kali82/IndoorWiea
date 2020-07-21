@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <title>WIEA Indoor Mapping</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #mapwize {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 800px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="mapwize"></div>
+  <div class="d-flex">
+    <div>
+      <button class="btn btn-outline-secondary" onclick="getAllLocales()">Get all locales (console)</button>
+      <button class="btn btn-outline-secondary" onclick="setFrLocale()">Set locale FR</button>
+      <button class="btn btn-outline-secondary" onclick="setEnLocale()">Set locale EN</button>
+    </div>
+    <div>
+      <button class="btn btn-outline-secondary" onclick="getUnits()">Get all units (console)</button>
+      <button class="btn btn-outline-secondary" onclick="setMunit()">Set unit to meter</button>
+      <button class="btn btn-outline-secondary" onclick="setFunit()">Set unit to feet</button>
+    </div>
+    <div>
+      <button class="btn btn-outline-secondary" onclick="setDirectionMode()">Go to direction mode</button>
+      <button class="btn btn-outline-secondary" onclick="getModes()">Get all modes</button>
+      <button class="btn btn-outline-secondary" onclick="getMode()">Get current mode</button>
+      <button class="btn btn-outline-secondary" onclick="setMode()">Set mode to Accessible</button>
+      <button class="btn btn-outline-secondary" onclick="setFrom()">Set from mapwize</button>
+      <button class="btn btn-outline-secondary" onclick="setTo()">Set to reception</button>
+    </div>
+    <div>
+      <button class="btn btn-outline-secondary" onclick="getSelected()">Get selected place</button>
+      <button class="btn btn-outline-secondary" onclick="setSelected()">Select mapwize place</button>
+    </div>
+
+    <div>
+      <button class="btn btn-outline-secondary" onclick="setUserLocation(3)">Set user location on mapwize</button>
+      <button class="btn btn-outline-secondary" onclick="setUserLocation(null)">Set user location without
+        floor</button>
+    </div>
+    <div>
+      <button class="btn btn-outline-secondary" onclick="remove()">Kill the map</button>
+    </div>
+  </div>
+  <script type="text/javascript" src="main.js"></script>
+  <script type="text/javascript" src="./mapwizeui.js"></script>
+</body>
+
+</html>
