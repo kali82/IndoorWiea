@@ -1,5 +1,5 @@
 var mapwizeMap = null;
-var apiKey = '89a2695d7485fda885c96b405dcc8a25';
+var apiKey = '944d933343f9d9fd9ef4049c573ef9cc';
 var modeId = '5da6bec9aefa100010c7df67';
 var wieaVenueId = '5c880286eb855e00163b5fb2';
 // var demoVenueId = '56c2ea3402275a0b00fb00ac';
