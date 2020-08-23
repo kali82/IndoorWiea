@@ -2,7 +2,10 @@ const CACHE_NAME = 'DUPA';
 
 // List of files which are store in cache.
 let filesToCache = [
-    '/IndoorWiea/src'
+    '/IndoorWiea/src',
+    '/src',
+    '/',
+    '/src/homepage.html'
 ];
 
 self.addEventListener('install', function (evt) {
