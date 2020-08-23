@@ -21,7 +21,7 @@
             "purpose": "any maskable"
         }
     ],
-    "start_url": "/src/homepage.html",
+    "start_url": "/IndoorWiea/src/homepage.html",
     "background_color": "#FFFFFF",
     "theme_color": "#FFFFFF",
     "display": "fullscreen"
