@@ -1,4 +1,4 @@
-const CACHE_NAME = 'DUPA';
+const CACHE_NAME = 'InWIEA_Cache';
 
 // List of files which are store in cache.
 let filesToCache = [
@@ -16,7 +16,7 @@ self.addEventListener('install', function (evt) {
             return cache.addAll(filesToCache);
         }).catch(function (err) {
             // Snooze errors...
-             console.error(err);
+            // console.error(err);
         })
     );
 });
