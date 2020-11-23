@@ -2,18 +2,21 @@ const CACHE_NAME = 'DUPA';
 
 // List of files which are store in cache.
 let filesToCache = [
-    './src',
+    './homepage.html',
     './',
-    './src/homepage.html'
+    './dupa.html',
+    './mapwizeui.js',
+    './main.js'
 ];
 
 self.addEventListener('install', function (evt) {
     evt.waitUntil(
         caches.open(CACHE_NAME).then(function (cache) {
+            console.log(filesToCache)
             return cache.addAll(filesToCache);
         }).catch(function (err) {
             // Snooze errors...
-            // console.error(err);
+             console.error(err);
         })
     );
 });

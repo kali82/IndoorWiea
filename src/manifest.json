@@ -3,25 +3,25 @@
     "name": "IndoorWiea",
     "icons": [
         {
-            "src": "/IndoorWiea/src/assets/icons/logo144.png",
+            "src": "./assets/icons/logo144.png",
             "sizes": "144x144",
             "type": "image/png",
             "purpose": "any maskable"
         },
         {
-            "src": "/IndoorWiea/src/assets/icons/logo192.png",
+            "src": "./assets/icons/logo192.png",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "any maskable"
         },
         {
-            "src": "/IndoorWiea/src/assets/icons/logo512.png",
+            "src": "./assets/icons/logo512.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any maskable"
         }
     ],
-    "start_url": "/IndoorWiea/src/homepage.html",
+    "start_url": "./homepage.html",
     "background_color": "#FFFFFF",
     "theme_color": "#FFFFFF",
     "display": "fullscreen"
