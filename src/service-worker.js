@@ -3,7 +3,7 @@ const CACHE_NAME = 'InWIEA_Cache';
 // List of files which are store in cache.
 let filesToCache = [
     './homepage.html',
-    './dupa.html',
+    './wieaMap.html',
     './mapwizeui.js',
     './main.js'
 ];

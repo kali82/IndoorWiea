@@ -12,8 +12,9 @@ window.onload = function () {
     from: { placeId: receptionPlaceId },
     to: { placeId: mapwizePlaceId }
   }).then(function (direction) {
-    MapwizeUI.map({ // Also works
-      // container: 'mapwize',  // Also works
+    MapwizeUI.map({ 
+      // Also works
+      // container: 'mapwize', 
       apiKey: apiKey,
       // direction: direction,
       // centerOnPlaceId: mapwizePlaceId,
