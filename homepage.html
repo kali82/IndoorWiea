@@ -1,0 +1,29 @@
+<!DOCTYPE html lang = "en">
+
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#FFFFFF">
+    <link rel="manifest" href="./manifest.json"/>
+    <link rel="apple-touch-icon" href="./assets/icons/logo144.png">
+    <title>WIEA Indoor Mapping</title>
+</head>
+
+<div>
+    <h1>Welcome to Indoor Mapping </h1>
+    <button onclick="location.href = './wieaMap.html'">klik !</button>
+</div>
+<script async>
+    const PATH = './service-worker.js';
+    
+    let isServiceWorkersSupport = ('serviceWorker' in navigator);
+    
+    if (isServiceWorkersSupport) {
+        console.log('Will service worker register?');
+        navigator.serviceWorker.register(PATH).then(function () {
+            console.log("Yes it did.");
+        }).catch(function (err) {
+            console.log("No it didn't. This happened: ", err)
+        });
+    }
+</script>

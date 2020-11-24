@@ -2,7 +2,6 @@ var mapwizeMap = null;
 var apiKey = '944d933343f9d9fd9ef4049c573ef9cc';
 var modeId = '5da6bec9aefa100010c7df67';
 var wieaVenueId = '5c880286eb855e00163b5fb2';
-// var demoVenueId = '56c2ea3402275a0b00fb00ac';
 var mapwizePlaceId = '5d08d8a4efe1d20012809ee5';
 var receptionPlaceId = '569f8d7cb4d7200b003c32a1';
 
@@ -12,8 +11,8 @@ window.onload = function () {
     from: { placeId: receptionPlaceId },
     to: { placeId: mapwizePlaceId }
   }).then(function (direction) {
-    MapwizeUI.map({ // Also works
-      // container: 'mapwize',  // Also works
+    MapwizeUI.map({ 
+      // container: 'mapwize', 
       apiKey: apiKey,
       // direction: direction,
       // centerOnPlaceId: mapwizePlaceId,
@@ -96,7 +95,7 @@ function setUserLocation(floor) {
   mapwizeMap.setUserLocation({
     latitude: 50.63262,
     longitude: 3.02045,
-    floor: floor
+    floor: floor // 0 as default
   });
 }
 

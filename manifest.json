@@ -1,0 +1,28 @@
+{
+    "short_name": "inWiea",
+    "name": "IndoorWiea",
+    "icons": [
+        {
+            "src": "./assets/icons/logo144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "./assets/icons/logo192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "./assets/icons/logo512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "start_url": "./homepage.html",
+    "background_color": "#FFFFFF",
+    "theme_color": "#FFFFFF",
+    "display": "fullscreen"
+}
