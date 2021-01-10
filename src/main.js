@@ -2,18 +2,23 @@ var mapwizeMap = null;
 var apiKey = '944d933343f9d9fd9ef4049c573ef9cc';
 var modeId = '5da6bec9aefa100010c7df67';
 var wieaVenueId = '5c880286eb855e00163b5fb2';
-// var demoVenueId = '56c2ea3402275a0b00fb00ac';
 var mapwizePlaceId = '5d08d8a4efe1d20012809ee5';
 var receptionPlaceId = '569f8d7cb4d7200b003c32a1';
+var selectedSidebar = false;
+var modal = document.getElementById("myModal");
+var span = document.getElementsByClassName("close")[0];
 
 window.onload = function () {
+  
+  var html5QrcodeScanner = new Html5QrcodeScanner(
+    "reader", { fps: 10, qrbox: 250 }, /* verbose= */ true);
+html5QrcodeScanner.render(onScanSuccess, onScanFailure);
   MapwizeUI.apiKey(apiKey);
   MapwizeUI.Api.getDirection({
     from: { placeId: receptionPlaceId },
     to: { placeId: mapwizePlaceId }
   }).then(function (direction) {
     MapwizeUI.map({ 
-      // Also works
       // container: 'mapwize', 
       apiKey: apiKey,
       // direction: direction,
@@ -25,16 +30,23 @@ window.onload = function () {
       mainColor: '#fca903',
       // hideMenu: true,
       // onDirectionQueryWillBeSent: function (query) { return query; },
-      // onDirectionWillBeDisplayed: function (direction, options) { return { direction: direction, options: options }; },
-      // onSearchQueryWillBeSent: function (searchString, searchOptions) { return { searchString: searchString, searchOptions: searchOptions }; },
-      // onSearchResultWillBeDisplayed: function (results) { return results; },
+       onDirectionWillBeDisplayed: function (direction, options) { return { direction: direction, options: options }; },
+       onSearchQueryWillBeSent: function (searchString, searchOptions) { return { searchString: searchString, searchOptions: searchOptions }; },
+       onSearchResultWillBeDisplayed: function (results) { return results; },
       onInformationButtonClick: function (e) {
         console.log('onInformationButtonClick', e);
         alert('onInformationButtonClick ' + e.name);
       },
       onMenuButtonClick: function (e) {
-        console.log('onMenuButtonClick');
-        alert('onMenuButtonClick');
+        if(!selectedSidebar){
+          document.getElementById("mySidenav").style.width = "250px";
+          console.log(document.getElementById("mySidenav"));
+          selectedSidebar = true;
+        } else {
+          document.getElementById("mySidenav").style.width = "0";
+          selectedSidebar = false;
+        }
+   
       }
     }).then(function (instance) {
       console.log('MAP LOADED');
@@ -95,13 +107,42 @@ function setTo() {
 
 function setUserLocation(floor) {
   mapwizeMap.setUserLocation({
-    latitude: 50.63262,
-    longitude: 3.02045,
-    floor: floor
+    latitude: 51.9413217518097,
+    longitude: 15.529180169105532,
+    floor: floor // 0 as default
   });
 }
 
 function remove() {
   mapwizeMap.remove();
 }
+function onScanSuccess(qrMessage) {
+  modal.style.display = "none";
+  setUserLocation(0);
+  // handle the scanned code as you like
+  
+  
+ 
+}
 
+function onScanFailure(error) {
+
+	// handle scan failure, usually better to ignore and keep scanning
+	//console.warn(`QR error = ${error}`);
+}
+function showModal() {
+	// handle scan failure, usually better to ignore and keep scanning
+  modal.style.display = "block";
+  document.getElementById("mySidenav").style.width = "0";
+          selectedSidebar = false;
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+
+}
+span.onclick = function() {
+  modal.style.display = "none";
+
+}
