@@ -7,12 +7,14 @@ var receptionPlaceId = '569f8d7cb4d7200b003c32a1';
 var selectedSidebar = false;
 var modal = document.getElementById("myModal");
 var span = document.getElementsByClassName("close")[0];
+var cloakroomId = '5c891ac8aa5c17001694b3bf';
 
 window.onload = function () {
   
+  
   var html5QrcodeScanner = new Html5QrcodeScanner(
     "reader", { fps: 10, qrbox: 250 }, /* verbose= */ true);
-html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+  html5QrcodeScanner.render(onScanSuccess, onScanFailure);
   MapwizeUI.apiKey(apiKey);
   MapwizeUI.Api.getDirection({
     from: { placeId: receptionPlaceId },
@@ -22,7 +24,7 @@ html5QrcodeScanner.render(onScanSuccess, onScanFailure);
       // container: 'mapwize', 
       apiKey: apiKey,
       // direction: direction,
-      // centerOnPlaceId: mapwizePlaceId,
+       //centerOnPlaceId: cloakroomId,
       centerOnVenueId: wieaVenueId,
       // restrictContentToOrganizationId: '',
       // restrictContentToVenueId: euratechnologieVenueId,
@@ -33,6 +35,8 @@ html5QrcodeScanner.render(onScanSuccess, onScanFailure);
        onDirectionWillBeDisplayed: function (direction, options) { return { direction: direction, options: options }; },
        onSearchQueryWillBeSent: function (searchString, searchOptions) { return { searchString: searchString, searchOptions: searchOptions }; },
        onSearchResultWillBeDisplayed: function (results) { return results; },
+       onSelectedChange: onSelectedChange,  
+
       onInformationButtonClick: function (e) {
         console.log('onInformationButtonClick', e);
         alert('onInformationButtonClick ' + e.name);
@@ -51,9 +55,23 @@ html5QrcodeScanner.render(onScanSuccess, onScanFailure);
     }).then(function (instance) {
       console.log('MAP LOADED');
       mapwizeMap = instance;
+      mapwizeMap.addMarkerOnPlace(mapwizeSourceKey, myCustomMarker).then(function (marker) {
+        // Marker as been added on map
+        console.log(marker);
+      }).catch(function (err) {
+        return console.error('addMarker failed', err);
+      });
     });
   });
 };
+
+function centerOnPlaceId() {
+  mapwizeMap.centerOnPlace(cloakroomId);
+  MapwizeUI.Api.getPlace(cloakroomId).then(place => {
+    place.objectClass = 'place';
+    mapwizeMap.setFrom(place);
+  });
+}
 
 function setDirectionMode() {
   mapwizeMap.setDirectionMode().catch(() => null)
@@ -104,6 +122,23 @@ function setTo() {
     mapwizeMap.setTo(place);
   });
 }
+function onSelectedChange(e) {
+  console.log(e);
+  if (e) {
+    console.log('dupa');
+  	const currentFloor = mapwizeMap.getFloor();
+    if (currentFloor === 1) {
+      if (e.data && e.data.goTo) {
+      	mapwizeMap.setSelected(null);
+        mapwizeMap.setFloor(e.data.goTo);
+      }
+    } else {
+    	mapwizeMap.setDirectionMode();
+      mapwizeMap.setFrom(mapwizeSourcePlaceObject);
+      mapwizeMap.setTo(e);
+    }
+  }
+}
 
 function setUserLocation(floor) {
   mapwizeMap.setUserLocation({
@@ -117,12 +152,11 @@ function remove() {
   mapwizeMap.remove();
 }
 function onScanSuccess(qrMessage) {
-  modal.style.display = "none";
+  centerOnPlaceId();
   setUserLocation(0);
+  modal.style.display = "none";
   // handle the scanned code as you like
   
-  
- 
 }
 
 function onScanFailure(error) {
