@@ -90,8 +90,8 @@ function setMode() {
 function getSelected() {
   console.log(mapwizeMap.getSelected());
 }
-function setSelected() {
-  mapwizeMap.setSelected(mapwizePlaceId);
+function setSelected(placeId) {
+  mapwizeMap.setSelected(placeId);
 }
 function getAllLocales() {
   console.log(mapwizeMap.getLocales());
@@ -129,18 +129,16 @@ function onSelectedChange(e) {
   if (e) {
     console.log('dupa');
   	const currentFloor = mapwizeMap.getFloor();
-    if (currentFloor === 1) {
-      if (e.data && e.data.goTo) {
-      	mapwizeMap.setSelected(null);
-        mapwizeMap.setFloor(e.data.goTo);
-      }
-    } else {
-    	mapwizeMap.setDirectionMode();
-      mapwizeMap.setFrom(mapwizeSourcePlaceObject);
-      mapwizeMap.setTo(e);
+
+      	mapwizeMap.setSelected(e._id);
+        // mapwizeMap.setFloor(e.goTo);
+
+      mapwizeMap.setDirectionMode();
+      console.log(e)
+      //mapwizeMap.setFrom(mapwizeSourcePlaceObject);
+      // mapwizeMap.setTo(e);
     }
   }
-}
 
 function setUserLocation(latitude,longitude ) {
   mapwizeMap.setUserLocation({
