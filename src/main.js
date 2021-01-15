@@ -125,17 +125,24 @@ function setTo() {
   });
 }
 function onSelectedChange(e) {
-  if (e) {
-      	mapwizeMap.setSelected(e._id);
-        // mapwizeMap.setFloor(e.goTo);
+  try {
+  var selected = mapwizeMap.getSelected();
+  console.log(selected);
+  if(selected._id != e._id){
+    if (e) {
+          mapwizeMap.setSelected(e._id);
+          // mapwizeMap.setFloor(e.goTo);
 
-      //mapwizeMap.setDirectionMode();
+        //mapwizeMap.setDirectionMode();
 
-      //mapwizeMap.setFrom(mapwizeSourcePlaceObject);
-      // mapwizeMap.setTo(e);
+        //mapwizeMap.setFrom(mapwizeSourcePlaceObject);
+        // mapwizeMap.setTo(e);
+      }
     }
+  } catch (error) {
+    
   }
-
+}
 function setUserLocation(latitude,longitude ) {
   mapwizeMap.setUserLocation({
     latitude: latitude,
