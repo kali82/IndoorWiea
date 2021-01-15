@@ -14,7 +14,7 @@ window.onload = function () {
   
   
    html5QrcodeScanner = new Html5QrcodeScanner(
-    "reader", { fps: 10, qrbox: 750 }, /* verbose= */ true);
+    "reader", { fps: 10, qrbox: 250 }, /* verbose= */ true);
   html5QrcodeScanner.render(onScanSuccess, onScanFailure);
   MapwizeUI.apiKey(apiKey);
   MapwizeUI.Api.getDirection({
@@ -125,16 +125,12 @@ function setTo() {
   });
 }
 function onSelectedChange(e) {
-  console.log(e);
   if (e) {
-    console.log('dupa');
-  	const currentFloor = mapwizeMap.getFloor();
-
       	mapwizeMap.setSelected(e._id);
         // mapwizeMap.setFloor(e.goTo);
 
       //mapwizeMap.setDirectionMode();
-      console.log(e)
+
       //mapwizeMap.setFrom(mapwizeSourcePlaceObject);
       // mapwizeMap.setTo(e);
     }
