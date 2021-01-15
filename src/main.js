@@ -8,12 +8,13 @@ var selectedSidebar = false;
 var modal = document.getElementById("myModal");
 var span = document.getElementsByClassName("close")[0];
 var cloakroomId = '5c891ac8aa5c17001694b3bf';
-
+var lastResult;
+var html5QrcodeScanner
 window.onload = function () {
   
   
-  var html5QrcodeScanner = new Html5QrcodeScanner(
-    "reader", { fps: 10, qrbox: 250 }, /* verbose= */ true);
+   html5QrcodeScanner = new Html5QrcodeScanner(
+    "reader", { fps: 10, qrbox: 750 }, /* verbose= */ true);
   html5QrcodeScanner.render(onScanSuccess, onScanFailure);
   MapwizeUI.apiKey(apiKey);
   MapwizeUI.Api.getDirection({
@@ -55,22 +56,23 @@ window.onload = function () {
     }).then(function (instance) {
       console.log('MAP LOADED');
       mapwizeMap = instance;
-      mapwizeMap.addMarkerOnPlace(mapwizeSourceKey, myCustomMarker).then(function (marker) {
-        // Marker as been added on map
-        console.log(marker);
-      }).catch(function (err) {
-        return console.error('addMarker failed', err);
-      });
+      // mapwizeMap.addMarkerOnPlace(mapwizeSourceKey, myCustomMarker).then(function (marker) {
+      //   // Marker as been added on map
+      //   console.log(marker);
+      // }).catch(function (err) {
+      //   return console.error('addMarker failed', err);
+      // });
     });
   });
 };
 
-function centerOnPlaceId() {
-  mapwizeMap.centerOnPlace(cloakroomId);
-  MapwizeUI.Api.getPlace(cloakroomId).then(place => {
+function centerOnPlaceId(id) {
+  mapwizeMap.centerOnPlace(id);
+  MapwizeUI.Api.getPlace(id).then(place => {
     place.objectClass = 'place';
     mapwizeMap.setFrom(place);
   });
+  setDirectionMode()
 }
 
 function setDirectionMode() {
@@ -140,11 +142,11 @@ function onSelectedChange(e) {
   }
 }
 
-function setUserLocation(floor) {
+function setUserLocation(latitude,longitude ) {
   mapwizeMap.setUserLocation({
-    latitude: 51.9413217518097,
-    longitude: 15.529180169105532,
-    floor: floor // 0 as default
+    latitude: latitude,
+    longitude: longitude,
+    floor: 0 // 0 as default
   });
 }
 
@@ -152,16 +154,25 @@ function remove() {
   mapwizeMap.remove();
 }
 function onScanSuccess(qrMessage) {
-  centerOnPlaceId();
-  setUserLocation(0);
-  modal.style.display = "none";
-  // handle the scanned code as you like
+		
+    
+    var obj = JSON.parse(qrMessage);
+
+    modal.style.display = "none";
+    html5QrcodeScanner.clear().then(()=> {
+      console.log(obj.latitude);
+      centerOnPlaceId(obj.id)
+      setUserLocation(obj.latitude, obj.longitude);
+      html5QrcodeScanner = new Html5QrcodeScanner(
+        "reader", { fps: 10, qrbox: 750 }, /* verbose= */ true);
+      html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+    }
+    );
+
   
 }
 
 function onScanFailure(error) {
-
-	// handle scan failure, usually better to ignore and keep scanning
 	//console.warn(`QR error = ${error}`);
 }
 function showModal() {
