@@ -133,7 +133,7 @@ function onSelectedChange(e) {
       	mapwizeMap.setSelected(e._id);
         // mapwizeMap.setFloor(e.goTo);
 
-      mapwizeMap.setDirectionMode();
+      //mapwizeMap.setDirectionMode();
       console.log(e)
       //mapwizeMap.setFrom(mapwizeSourcePlaceObject);
       // mapwizeMap.setTo(e);
