@@ -51,17 +51,11 @@ window.onload = function () {
           document.getElementById("mySidenav").style.width = "0";
           selectedSidebar = false;
         }
-   
+        
       }
     }).then(function (instance) {
       console.log('MAP LOADED');
       mapwizeMap = instance;
-      // mapwizeMap.addMarkerOnPlace(mapwizeSourceKey, myCustomMarker).then(function (marker) {
-      //   // Marker as been added on map
-      //   console.log(marker);
-      // }).catch(function (err) {
-      //   return console.error('addMarker failed', err);
-      // });
     });
   });
 };
@@ -180,15 +174,21 @@ function showModal() {
 	// handle scan failure, usually better to ignore and keep scanning
   modal.style.display = "block";
   document.getElementById("mySidenav").style.width = "0";
-          selectedSidebar = false;
+  selectedSidebar = false;
+  document.getElementsByClassName("mapboxgl-ctrl-bottom-right")[0].style.display = "none";
+  document.getElementsByClassName("mapboxgl-ctrl-top-right")[0].style.display = "none";
+  
 }
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
+    document.getElementsByClassName("mapboxgl-ctrl-bottom-right")[0].style.display = "";
+    document.getElementsByClassName("mapboxgl-ctrl-top-right")[0].style.display = "";
   }
 
 }
 span.onclick = function() {
   modal.style.display = "none";
-
+  document.getElementsByClassName("mapboxgl-ctrl-bottom-right")[0].style.display = "";
+  document.getElementsByClassName("mapboxgl-ctrl-top-right")[0].style.display = "";
 }
