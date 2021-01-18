@@ -152,7 +152,8 @@ function onScanSuccess(qrMessage) {
 		
     
     var obj = JSON.parse(qrMessage);
-
+    document.getElementsByClassName("mapboxgl-ctrl-bottom-right")[0].style.display = "";
+    document.getElementsByClassName("mapboxgl-ctrl-top-right")[0].style.display = "";
     modal.style.display = "none";
     html5QrcodeScanner.clear().then(()=> {
       console.log(obj.latitude);
